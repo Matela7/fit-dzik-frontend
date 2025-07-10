@@ -7,6 +7,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import HomePage from './pages/HomePage';
 import Dashboard from './pages/Dashboard';
 import CreateWorkout from './pages/CreateWorkout';
+import ExerciseLibrary from './pages/ExerciseLibrary';
+import AITrainer from './pages/AITrainer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Navigation from './components/Navigation';
@@ -35,6 +37,16 @@ function App() {
               <Route path="/create-workout" element={
                 <ProtectedRoute>
                   <CreateWorkout />
+                </ProtectedRoute>
+              } />
+              <Route path="/exercise-library" element={
+                <ProtectedRoute>
+                  <ExerciseLibrary />
+                </ProtectedRoute>
+              } />
+              <Route path="/ai-trainer" element={
+                <ProtectedRoute>
+                  <AITrainer />
                 </ProtectedRoute>
               } />
             </Routes>

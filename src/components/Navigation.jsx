@@ -41,6 +41,18 @@ const Navigation = () => {
               >
                 Nowy trening
               </Link>
+              <Link 
+                to="/exercise-library" 
+                className={`nav-link ${location.pathname === '/exercise-library' ? 'active' : ''}`}
+              >
+                Biblioteka ćwiczeń
+              </Link>
+              <Link 
+                to="/ai-trainer" 
+                className={`nav-link ${location.pathname === '/ai-trainer' ? 'active' : ''}`}
+              >
+                AI Trener
+              </Link>
               <div className="user-info">
                 <span className="user-name">
                   👋 {user?.firstName} {user?.surname}

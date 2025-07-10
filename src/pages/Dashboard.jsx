@@ -140,29 +140,29 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="dashboard-loading">
-        <div className="spinner">🏋️‍♂️</div>
-        <p>Ładowanie Twojego dashboardu...</p>
+      <div className="dashboard">
+        <div className="dashboard-container">
+          <div className="dashboard-loading">
+            <div className="loading-spinner"></div>
+            <p className="loading-text">Ładowanie Twojego dashboardu...</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="dashboard-error">
-        <div className="error-message">
-          <h2>❌ Błąd połączenia</h2>
-          <p>{error}</p>
-          <button onClick={fetchDashboardData} className="retry-button">
-            🔄 Spróbuj ponownie
-          </button>
-          <div className="error-help">
-            <p><strong>Możliwe rozwiązania:</strong></p>
-            <ul>
-              <li>Sprawdź czy backend jest uruchomiony na http://localhost:8080</li>
-              <li>Sprawdź połączenie internetowe</li>
-              <li>Sprawdź czy serwer API działa poprawnie</li>
-            </ul>
+      <div className="dashboard">
+        <div className="dashboard-container">
+          <div className="dashboard-error">
+            <div className="error-message">
+              <h3>❌ Błąd połączenia</h3>
+              <p>{error}</p>
+              <button onClick={fetchDashboardData} className="retry-button">
+                🔄 Spróbuj ponownie
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -171,125 +171,131 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-header">
-        <h1>Dashboard 📊</h1>
-        <p>Witaj z powrotem {user?.firstName}! Oto Twoje postępy w FIT DZIK:</p>
-      </div>
+      <div className="dashboard-container">
+        <div className="dashboard-header">
+          <h1>📊 Dashboard</h1>
+          <p>Witaj z powrotem {user?.firstName}! Oto Twoje postępy w FIT DZIK</p>
+        </div>
 
-      {/* Statystyki */}
-      <div className="stats-grid">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="stat-card"
-        >
-          <div className="stat-icon">🏋️‍♂️</div>
-          <div className="stat-info">
-            <h3>{stats.totalSessions}</h3>
-            <p>Łączne treningi</p>
-          </div>
-        </motion.div>
+        {/* Statystyki */}
+        <div className="stats-section">
+          <h2 className="section-title">📈 Twoje statystyki</h2>
+          <div className="stats-grid">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="stat-card"
+            >
+              <div className="stat-icon">🏋️‍♂️</div>
+              <div className="stat-info">
+                <h3>{stats.totalSessions}</h3>
+                <p>Łączne treningi</p>
+              </div>
+            </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="stat-card"
-        >
-          <div className="stat-icon">💪</div>
-          <div className="stat-info">
-            <h3>{stats.totalExercises}</h3>
-            <p>Wykonane ćwiczenia</p>
-          </div>
-        </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="stat-card"
+            >
+              <div className="stat-icon">💪</div>
+              <div className="stat-info">
+                <h3>{stats.totalExercises}</h3>
+                <p>Wykonane ćwiczenia</p>
+              </div>
+            </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="stat-card"
-        >
-          <div className="stat-icon">🔥</div>
-          <div className="stat-info">
-            <h3>{stats.caloriesBurned}</h3>
-            <p>Spalone kalorie</p>
-          </div>
-        </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="stat-card"
+            >
+              <div className="stat-icon">🔥</div>
+              <div className="stat-info">
+                <h3>{stats.caloriesBurned}</h3>
+                <p>Spalone kalorie</p>
+              </div>
+            </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="stat-card"
-        >
-          <div className="stat-icon">📅</div>
-          <div className="stat-info">
-            <h3>{stats.thisWeekSessions}</h3>
-            <p>Treningi ten tydzień</p>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="stat-card"
+            >
+              <div className="stat-icon">📅</div>
+              <div className="stat-info">
+                <h3>{stats.thisWeekSessions}</h3>
+                <p>Treningi ten tydzień</p>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
-      </div>
+        </div>
 
-      {/* Ostatnie treningi */}
-      <div className="recent-workouts">
-        <h2>Ostatnie treningi 🏃‍♂️</h2>
-        {sessions.length === 0 ? (
-          <div className="no-data">
-            <p>Jeszcze nie masz żadnych treningów! 😢</p>
-            <p>Czas zacząć swoją przygodę z FIT DZIK!</p>
+        {/* Ostatnie treningi */}
+        <div className="recent-workouts">
+          <div className="workouts-header">
+            <h2 className="section-title">🏃‍♂️ Ostatnie treningi</h2>
+            <a href="/create-workout" className="new-workout-btn">
+              ➕ Nowy trening
+            </a>
           </div>
-        ) : (
-          <div className="workouts-list">
-            {sessions.slice(0, 5).map((session, index) => (
-              <motion.div 
-                key={session.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="workout-card"
-              >
-                <div className="workout-info">
-                  <h3>Trening #{session.id}</h3>
-                  <p className="workout-date">{formatDate(session.startTime)}</p>
-                  <p className="workout-duration">
-                    Czas: {formatDuration(session.startTime, session.endTime)}
-                  </p>
-                </div>
-                <div className="workout-stats">
-                  <div className="workout-stat">
-                    <span className="stat-value">{session.caloriesBurned || 0}</span>
-                    <span className="stat-label">kcal</span>
+          {sessions.length === 0 ? (
+            <div className="no-workouts">
+              <div className="no-workouts-icon">🏋️‍♂️</div>
+              <h3>Jeszcze nie masz żadnych treningów!</h3>
+              <p>Czas zacząć swoją przygodę z FIT DZIK i stać się prawdziwym dzikiem fitness!</p>
+              <a href="/create-workout" className="btn btn-primary">
+                🚀 Rozpocznij pierwszy trening
+              </a>
+            </div>
+          ) : (
+            <div className="workouts-grid">
+              {sessions.slice(0, 6).map((session, index) => (
+                <motion.div 
+                  key={session.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="workout-card"
+                  onClick={() => openWorkoutDetails(session)}
+                >
+                  <div className="workout-card-header">
+                    <h3>Trening #{session.id}</h3>
+                    <p>{formatDate(session.startTime)}</p>
                   </div>
-                </div>
-                <div className="workout-actions">
-                  <button 
-                    onClick={() => openWorkoutDetails(session)}
-                    className="view-details-btn"
-                    title="Zobacz szczegóły treningu"
-                  >
-                    👁️ Szczegóły
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                  <div className="workout-card-body">
+                    <div className="workout-meta">
+                      <div className="workout-duration">
+                        ⏱️ {formatDuration(session.startTime, session.endTime)}
+                      </div>
+                      <div className="workout-date">
+                        📅 {new Date(session.startTime).toLocaleDateString('pl-PL')}
+                      </div>
+                    </div>
+                    <div className="workout-exercises">
+                      <strong>Ćwiczenia:</strong> {exercises.filter(ex => ex.sessionId === session.id).length || 'Brak danych'}
+                    </div>
+                    <div className="workout-calories">
+                      🔥 {session.caloriesBurned || 0} kcal
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Modal z szczegółami treningu */}
+        {selectedWorkout && (
+          <WorkoutDetails 
+            session={selectedWorkout}
+            onClose={closeWorkoutDetails}
+          />
         )}
       </div>
-
-      {/* Motivational Quote */}
-      <div className="motivation">
-        <h2>💪 Motywacja dnia</h2>
-        <p>"Jedynym złym treningiem jest ten, którego nie zrobiłeś!"</p>
-        <p className="motivation-author">- FIT DZIK Team</p>
-      </div>
-
-      {/* Modal z szczegółami treningu */}
-      {selectedWorkout && (
-        <WorkoutDetails 
-          session={selectedWorkout}
-          onClose={closeWorkoutDetails}
-        />
-      )}
     </div>
   );
 };

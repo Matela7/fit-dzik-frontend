@@ -51,20 +51,20 @@ const Navigation = () => {
               </div>
             </>
           ) : (
-            <>
+            <div className="auth-links">
               <Link 
                 to="/login" 
-                className={`nav-link ${location.pathname === '/login' ? 'active' : ''}`}
+                className={`auth-link login ${location.pathname === '/login' ? 'active' : ''}`}
               >
                 Zaloguj się
               </Link>
               <Link 
                 to="/register" 
-                className={`nav-link ${location.pathname === '/register' ? 'active' : ''}`}
+                className={`auth-link register ${location.pathname === '/register' ? 'active' : ''}`}
               >
                 Rejestracja
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

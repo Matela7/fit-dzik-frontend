@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { workoutAPI, exerciseAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
+import './CreateWorkout.css';
 
 const CreateWorkout = () => {
   const { user } = useAuth();

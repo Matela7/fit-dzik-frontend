@@ -1,0 +1,75 @@
+// src/components/Navigation.jsx
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import './Navigation.css';
+
+const Navigation = () => {
+  const location = useLocation();
+  const { user, logout, isAuthenticated } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  return (
+    <nav className="navigation">
+      <div className="nav-container">
+        <Link to="/" className="nav-logo">
+          🏋️‍♂️ FIT DZIK
+        </Link>
+        
+        <div className="nav-links">
+          <Link 
+            to="/" 
+            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+          >
+            Strona główna
+          </Link>
+          
+          {isAuthenticated() ? (
+            <>
+              <Link 
+                to="/dashboard" 
+                className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
+              >
+                Dashboard
+              </Link>
+              <Link 
+                to="/create-workout" 
+                className={`nav-link ${location.pathname === '/create-workout' ? 'active' : ''}`}
+              >
+                Nowy trening
+              </Link>
+              <div className="user-info">
+                <span className="user-name">
+                  👋 {user?.firstName} {user?.surname}
+                </span>
+                <button onClick={handleLogout} className="logout-btn">
+                  Wyloguj 🚪
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <Link 
+                to="/login" 
+                className={`nav-link ${location.pathname === '/login' ? 'active' : ''}`}
+              >
+                Zaloguj się
+              </Link>
+              <Link 
+                to="/register" 
+                className={`nav-link ${location.pathname === '/register' ? 'active' : ''}`}
+              >
+                Rejestracja
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navigation;
